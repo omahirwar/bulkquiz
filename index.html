@@ -468,6 +468,150 @@
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
+        .quiz-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .quiz-welcome, .quiz-active, .quiz-results {
+            display: none;
+        }
+
+        .quiz-welcome.active, .quiz-active.active, .quiz-results.active {
+            display: block;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .category-btn {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 30px 20px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .category-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(79, 172, 254, 0.5);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+            transition: width 0.3s ease;
+        }
+
+        .question-box {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 40px;
+            border-radius: 16px;
+            margin-bottom: 30px;
+        }
+
+        .question-number {
+            color: #4facfe;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+        }
+
+        .question-text {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .option {
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .option:hover {
+            background: rgba(79, 172, 254, 0.1);
+            border-color: #4facfe;
+            transform: translateX(5px);
+        }
+
+        .option.selected {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            border-color: #4facfe;
+        }
+
+        .option.correct {
+            background: #43e97b;
+            border-color: #43e97b;
+        }
+
+        .option.wrong {
+            background: #f5576c;
+            border-color: #f5576c;
+        }
+
+        .explanation {
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(67, 233, 123, 0.1);
+            border-left: 4px solid #43e97b;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .explanation.show {
+            display: block;
+        }
+
+        .score-circle {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 30px auto;
+            box-shadow: 0 10px 30px rgba(79, 172, 254, 0.5);
+        }
+
+        .score-circle .score {
+            font-size: 4rem;
+            font-weight: bold;
+        }
+
+        .score-circle .total {
+            font-size: 1.5rem;
+        }
+
         /* Footer */
         footer {
             background: rgba(10, 10, 15, 0.8);
@@ -678,24 +822,12 @@
         <h2>Backed by Industry Leaders</h2>
         <p class="subtitle">$8M seed round raised from top VCs and Solana ecosystem leaders</p>
         <div class="backers-grid">
-            <div class="backer-card">
-                <h4>Robot Ventures</h4>
-            </div>
-            <div class="backer-card">
-                <h4>6th Man Ventures</h4>
-            </div>
-            <div class="backer-card">
-                <h4>Delphi Digital</h4>
-            </div>
-            <div class="backer-card">
-                <h4>Mirana Ventures</h4>
-            </div>
-            <div class="backer-card">
-                <h4>Wintermute</h4>
-            </div>
-            <div class="backer-card">
-                <h4>Solana Founders</h4>
-            </div>
+            <div class="backer-card"><h4>Robot Ventures</h4></div>
+            <div class="backer-card"><h4>6th Man Ventures</h4></div>
+            <div class="backer-card"><h4>Delphi Digital</h4></div>
+            <div class="backer-card"><h4>Mirana Ventures</h4></div>
+            <div class="backer-card"><h4>Wintermute</h4></div>
+            <div class="backer-card"><h4>Solana Founders</h4></div>
         </div>
     </section>
 
@@ -749,14 +881,65 @@
         </div>
     </section>
 
-    <!-- Quiz Section -->
+    <!-- Quiz Section with Full Functionality -->
     <section id="quiz">
-        <h2>Test Your Knowledge</h2>
-        <p class="subtitle">Take our interactive quiz to learn more about BULK Trade and DeFi trading</p>
-        <div style="text-align: center; margin-top: 40px;">
-            <a href="#" onclick="alert('Quiz feature coming soon! This will redirect to the BULK Trade Quiz app.'); return false;" class="btn btn-primary">
-                <i class="fas fa-question-circle"></i> Start Quiz
-            </a>
+        <div class="quiz-container">
+            <h2>Test Your Knowledge</h2>
+            <p class="subtitle">Take our interactive quiz to learn more about BULK Trade and DeFi trading</p>
+            
+            <!-- Quiz Welcome Screen -->
+            <div class="quiz-welcome active">
+                <div class="category-grid">
+                    <button class="category-btn" onclick="startQuiz('bulk')">
+                        📊 BULK Basics
+                    </button>
+                    <button class="category-btn" onclick="startQuiz('trading')">
+                        💹 Trading Concepts
+                    </button>
+                    <button class="category-btn" onclick="startQuiz('defi')">
+                        🔗 DeFi Knowledge
+                    </button>
+                    <button class="category-btn" onclick="startQuiz('ui')">
+                        🎨 UI/UX Design
+                    </button>
+                </div>
+                <div style="text-align: center; margin-top: 30px;">
+                    <button class="btn btn-primary" onclick="startQuiz('all')">
+                        🎯 Take Full Quiz (15 Questions)
+                    </button>
+                </div>
+            </div>
+
+            <!-- Quiz Active Screen -->
+            <div class="quiz-active">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+                <div class="question-box">
+                    <div class="question-number" id="questionNumber"></div>
+                    <div class="question-text" id="questionText"></div>
+                    <div class="options" id="options"></div>
+                    <div class="explanation" id="explanation"></div>
+                </div>
+                <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()" disabled>
+                    Next Question →
+                </button>
+            </div>
+
+            <!-- Quiz Results Screen -->
+            <div class="quiz-results">
+                <div style="text-align: center;">
+                    <h2 style="margin-bottom: 20px;">Quiz Completed! 🎉</h2>
+                    <div class="score-circle">
+                        <div class="score" id="finalScore">0</div>
+                        <div class="total" id="finalTotal">/ 15</div>
+                    </div>
+                    <p style="font-size: 1.5rem; margin: 20px 0;" id="feedback"></p>
+                    <button class="btn btn-primary" onclick="restartQuiz()">
+                        🔄 Take Another Quiz
+                    </button>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -771,12 +954,228 @@
         <p>&copy; 2025 BULK Trade. All rights reserved. Built with 💙 for the DeFi community.</p>
     </footer>
 
-    <!-- Welcome Sound -->
     <audio id="welcomeSound" preload="auto">
         <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBSuBzvLZiTYIF2e57OihUBELTqXh8LJnHgU2jdXvxnMpBSl+zPDajj0IFV2y6OyrWBQLRp7f8b5tIQU=" type="audio/wav">
     </audio>
 
     <script>
+        const quizData = {
+            bulk: [
+                {
+                    question: "What is the primary innovation of BULK Exchange?",
+                    options: ["A new cryptocurrency token", "Colocation-grade performance orderbook on Solana", "A lending protocol", "An NFT marketplace"],
+                    correct: 1,
+                    explanation: "BULK Exchange delivers a novel execution architecture capable of colocation-grade performance without compromising decentralization."
+                },
+                {
+                    question: "What is BULK's trade finality time?",
+                    options: ["100ms", "40ms", "10ms", "200ms"],
+                    correct: 1,
+                    explanation: "BULK achieves 40ms trade finality with 20ms matching tick, comparable to top CEX platforms."
+                },
+                {
+                    question: "Which blockchain does BULK Exchange operate on?",
+                    options: ["Ethereum", "Binance Smart Chain", "Solana", "Polygon"],
+                    correct: 2,
+                    explanation: "BULK is built on Solana, integrating directly into Solana's validator infrastructure for optimal performance."
+                },
+                {
+                    question: "What type of trading does BULK specialize in?",
+                    options: ["Spot trading", "Perpetual futures", "Options", "Margin lending"],
+                    correct: 1,
+                    explanation: "BULK Exchange is a decentralized perpetuals DEX focused on high-performance derivatives trading."
+                }
+            ],
+            trading: [
+                {
+                    question: "What does CLOB stand for in trading?",
+                    options: ["Central Lending Order Book", "Central Limit Order Book", "Crypto Lending Order Base", "Combined Limit Order Bridge"],
+                    correct: 1,
+                    explanation: "CLOB (Central Limit Order Book) is the core architecture used for matching orders based on price-time priority."
+                },
+                {
+                    question: "What is a perpetual swap?",
+                    options: ["A token swap protocol", "A derivative without expiration dates", "A liquidity pool", "A governance mechanism"],
+                    correct: 1,
+                    explanation: "Perpetual swaps are derivative instruments that enable traders to speculate on price movements without expiration dates."
+                },
+                {
+                    question: "What is the funding rate in perpetuals?",
+                    options: ["The interest rate on borrowed funds", "Periodic payments between long and short positions", "The platform trading fee", "The liquidation fee"],
+                    correct: 1,
+                    explanation: "Funding rates maintain price alignment with spot markets through periodic payments between longs and shorts."
+                },
+                {
+                    question: "What is price-time priority in orderbooks?",
+                    options: ["Random order execution", "Orders matched by price, then by time received", "Only time matters", "Only price matters"],
+                    correct: 1,
+                    explanation: "Price-time priority ensures fair execution: best price gets priority, and among same prices, earliest order executes first."
+                }
+            ],
+            defi: [
+                {
+                    question: "What does DeFi stand for?",
+                    options: ["Digital Finance", "Decentralized Finance", "Distributed Exchange Format", "Derivative Financial Instruments"],
+                    correct: 1,
+                    explanation: "DeFi (Decentralized Finance) refers to financial services built on blockchain without centralized intermediaries."
+                },
+                {
+                    question: "What is the main advantage of DEX over CEX?",
+                    options: ["Higher trading fees", "Self-custody and transparency", "Slower execution", "Limited trading pairs"],
+                    correct: 1,
+                    explanation: "DEXs provide self-sovereign trading with complete transparency and asset control, unlike centralized exchanges."
+                },
+                {
+                    question: "What is a key challenge BULK solves in DeFi?",
+                    options: ["Creating new tokens", "Performance deficit in on-chain trading", "NFT minting", "Wallet creation"],
+                    correct: 1,
+                    explanation: "BULK addresses the performance deficit in on-chain orderbook trading, bringing it closer to CEX speeds."
+                },
+                {
+                    question: "What is permissionless access in DeFi?",
+                    options: ["No security measures", "Anyone can participate without approval", "Free trading", "No KYC requirements only"],
+                    correct: 1,
+                    explanation: "Permissionless access means anyone, anywhere can use the protocol without needing approval from a centralized authority."
+                }
+            ],
+            ui: [
+                {
+                    question: "What is the most important aspect of trading UI?",
+                    options: ["Colorful animations", "Real-time data and clarity", "Social media integration", "Game-like features"],
+                    correct: 1,
+                    explanation: "Trading UIs must prioritize real-time data accuracy and clarity to enable quick decision-making."
+                },
+                {
+                    question: "What is responsive design?",
+                    options: ["Fast loading times", "Adapting layout to different screen sizes", "Animated buttons", "Voice-activated controls"],
+                    correct: 1,
+                    explanation: "Responsive design ensures the interface works seamlessly across desktop, tablet, and mobile devices."
+                },
+                {
+                    question: "Why is color contrast important in trading platforms?",
+                    options: ["Makes it look professional", "Ensures readability and accessibility", "Matches brand colors", "Reduces eye strain only"],
+                    correct: 1,
+                    explanation: "High color contrast ensures critical trading information is readable and accessible to all users, including those with visual impairments."
+                }
+            ]
+        };
+
+        let currentQuiz = [];
+        let currentQuestion = 0;
+        let score = 0;
+        let selectedAnswer = null;
+
+        function startQuiz(category) {
+            if (category === 'all') {
+                currentQuiz = [
+                    ...quizData.bulk,
+                    ...quizData.trading,
+                    ...quizData.defi,
+                    ...quizData.ui
+                ];
+            } else {
+                currentQuiz = [...quizData[category]];
+            }
+            
+            currentQuiz = currentQuiz.sort(() => Math.random() - 0.5).slice(0, 15);
+            currentQuestion = 0;
+            score = 0;
+            
+            document.querySelector('.quiz-welcome').classList.remove('active');
+            document.querySelector('.quiz-active').classList.add('active');
+            
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            if (currentQuestion >= currentQuiz.length) {
+                endQuiz();
+                return;
+            }
+            
+            const question = currentQuiz[currentQuestion];
+            const progress = ((currentQuestion + 1) / currentQuiz.length) * 100;
+            
+            document.getElementById('progressBar').style.width = progress + '%';
+            document.getElementById('questionNumber').textContent = `Question ${currentQuestion + 1} of ${currentQuiz.length}`;
+            document.getElementById('questionText').textContent = question.question;
+            
+            const optionsContainer = document.getElementById('options');
+            optionsContainer.innerHTML = '';
+            
+            question.options.forEach((option, index) => {
+                const optionDiv = document.createElement('div');
+                optionDiv.className = 'option';
+                optionDiv.textContent = option;
+                optionDiv.onclick = () => selectAnswer(index);
+                optionsContainer.appendChild(optionDiv);
+            });
+            
+            document.getElementById('explanation').classList.remove('show');
+            document.getElementById('nextBtn').disabled = true;
+            selectedAnswer = null;
+        }
+
+        function selectAnswer(index) {
+            if (selectedAnswer !== null) return;
+            
+            selectedAnswer = index;
+            const question = currentQuiz[currentQuestion];
+            const options = document.querySelectorAll('.option');
+            
+            options.forEach((option, i) => {
+                if (i === question.correct) {
+                    option.classList.add('correct');
+                } else if (i === index) {
+                    option.classList.add('wrong');
+                }
+                option.style.pointerEvents = 'none';
+            });
+            
+            if (index === question.correct) {
+                score++;
+            }
+            
+            const explanationDiv = document.getElementById('explanation');
+            explanationDiv.innerHTML = `<strong>💡 Explanation:</strong> ${question.explanation}`;
+            explanationDiv.classList.add('show');
+            
+            document.getElementById('nextBtn').disabled = false;
+        }
+
+        function nextQuestion() {
+            currentQuestion++;
+            loadQuestion();
+        }
+
+        function endQuiz() {
+            document.querySelector('.quiz-active').classList.remove('active');
+            document.querySelector('.quiz-results').classList.add('active');
+            
+            document.getElementById('finalScore').textContent = score;
+            document.getElementById('finalTotal').textContent = `/ ${currentQuiz.length}`;
+            
+            const percentage = (score / currentQuiz.length) * 100;
+            let feedback = '';
+            
+            if (percentage >= 90) {
+                feedback = '🏆 Outstanding! You are a BULK Expert!';
+            } else if (percentage >= 70) {
+                feedback = '🌟 Great Job! You know your stuff!';
+            } else if (percentage >= 50) {
+                feedback = '👍 Good Effort! Keep Learning!';
+            } else {
+                feedback = '📚 Keep Studying! You will get there!';
+            }
+            
+            document.getElementById('feedback').textContent = feedback;
+        }
+
+        function restartQuiz() {
+            document.querySelector('.quiz-results').classList.remove('active');
+            document.querySelector('.quiz-welcome').classList.add('active');
+        }
+
         // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -788,7 +1187,7 @@
             });
         });
 
-        // Play welcome sound and hide loading screen
+        // Loading screen and welcome sound
         window.addEventListener('load', function() {
             const loadingScreen = document.getElementById('loadingScreen');
             const welcomeSound = document.getElementById('welcomeSound');
@@ -800,7 +1199,7 @@
             }, 2500);
         });
 
-        // Add scroll animation
+        // Scroll animations
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -100px 0px'
